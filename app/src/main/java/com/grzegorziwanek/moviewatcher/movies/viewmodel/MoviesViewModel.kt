@@ -33,6 +33,14 @@ class MoviesViewModel(
       .let { compositeDisposable.add(it) }
   }
 
+  fun searchInputModified(input: String) {
+    events.value = if (input.isEmpty()) {
+      MoviesEvent.InputModified(shouldShowClear = false)
+    } else {
+      MoviesEvent.InputModified(shouldShowClear = true)
+    }
+  }
+
   private fun emitLoadingEvent(response: MoviesResponse) {
     events.value = if (response.results.isNotEmpty()) {
       MoviesEvent.LoadingSuccess(response)

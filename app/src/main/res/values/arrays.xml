@@ -3,6 +3,7 @@
   <string-array name="movies_array">
     <item>The Avengers</item>
     <item>Batman Begins</item>
+    <item>Shrek</item>
     <item>Braveheart</item>
     <item>The French Connection</item>
     <item>Gladiator</item>
@@ -39,5 +40,11 @@
     <item>Night Of The Walking Dead</item>
     <item>Titanic</item>
     <item>Event Horizon</item>
+    <item>Aladdin</item>
+    <item>Chłopaki nie płaczą</item>
+    <item>Poranek kojota</item>
+    <item>Sami Swoi</item>
+    <item>Dzień Świra</item>
+    <item>Others</item>
   </string-array>
 </resources>

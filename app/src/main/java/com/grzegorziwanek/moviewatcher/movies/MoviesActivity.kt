@@ -13,11 +13,11 @@ import com.grzegorziwanek.moviewatcher.details.DetailsActivity
 import com.grzegorziwanek.moviewatcher.movies.adapter.MoviesAdapter
 import com.grzegorziwanek.moviewatcher.movies.viewmodel.MoviesEvent
 import com.grzegorziwanek.moviewatcher.movies.viewmodel.MoviesViewModel
+import com.grzegorziwanek.moviewatcher.utils.hideKeyboard
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.textChanges
 import kotlinx.android.synthetic.main.activity_movies.*
 import org.koin.android.ext.android.inject
-import java.util.concurrent.TimeUnit
 
 class MoviesActivity : BaseActivity() {
 
@@ -36,6 +36,7 @@ class MoviesActivity : BaseActivity() {
         is MoviesEvent.Loading -> showProgress()
         is MoviesEvent.LoadingSuccess -> handleLoadingSuccess(event)
         is MoviesEvent.FavouritesChanged -> handleFavouriteChanged()
+        is MoviesEvent.InputModified -> handleInputModified(event)
         is MoviesEvent.LoadingEmpty -> handleEmpty()
         is MoviesEvent.Error -> showError(event)
       }
@@ -65,6 +66,10 @@ class MoviesActivity : BaseActivity() {
   private fun setupBindings() {
     swipeRefresh.setOnRefreshListener { loadFeed() }
 
+    btnSearch.clicks()
+      .subscribe { loadFeed() }
+      .let { composite.add(it) }
+
     btnClear.clicks()
       .subscribe { search.text.clear() }
       .let { composite.add(it) }
@@ -74,8 +79,7 @@ class MoviesActivity : BaseActivity() {
       .let { composite.add(it) }
 
     search.textChanges()
-      .debounce(1, TimeUnit.SECONDS)
-      .subscribe { loadFeed() }
+      .subscribe { viewModel.searchInputModified(it.toString()) }
       .let { composite.add(it) }
 
     adapter.clickedMovie()
@@ -97,6 +101,14 @@ class MoviesActivity : BaseActivity() {
     adapter.setData(event.response.results)
     hideProgress()
     hideEmpty()
+  }
+
+  private fun handleInputModified(event: MoviesEvent.InputModified) {
+    if (event.shouldShowClear) {
+      showClearSearch()
+    } else {
+      hideClearSearch()
+    }
   }
 
   private fun handleEmpty() {
@@ -130,6 +142,14 @@ class MoviesActivity : BaseActivity() {
     swipeRefresh.isRefreshing = false
   }
 
+  private fun showClearSearch() {
+    btnClear.visibility = View.VISIBLE
+  }
+
+  private fun hideClearSearch() {
+    btnClear.visibility = View.GONE
+  }
+
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     if (requestCode == MOVIE_CODE && resultCode == CODE_RELOAD) {
@@ -138,6 +158,7 @@ class MoviesActivity : BaseActivity() {
   }
 
   private fun loadFeed() {
+    hideKeyboard(this)
     if (search.text.isEmpty()) {
       viewModel.requestNowPlaying()
     } else {

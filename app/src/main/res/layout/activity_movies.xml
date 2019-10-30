@@ -13,8 +13,6 @@
     android:layout_height="56dp"
     android:background="@color/grey_95"
     android:orientation="horizontal"
-    android:paddingStart="@dimen/spacing_16dp"
-    android:paddingEnd="@dimen/spacing_16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -28,10 +26,23 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+      android:id="@+id/btnSearch"
+      android:layout_width="?attr/actionBarSize"
+      android:layout_height="?attr/actionBarSize"
+      android:background="@android:color/transparent"
+      android:tint="@android:color/white"
+      android:visibility="visible"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_search" />
+
     <AutoCompleteTextView
       android:id="@+id/search"
       android:layout_width="0dp"
       android:layout_height="match_parent"
+      android:layout_marginStart="@dimen/spacing_16dp"
       android:layout_weight="1"
       android:background="@android:color/transparent"
       android:hint="@string/search"
@@ -43,7 +54,7 @@
       android:textColorHint="@color/grey_3"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@+id/btnClear"
-      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/btnSearch"
       app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -84,6 +95,7 @@
       android:layout_height="wrap_content"
       android:paddingStart="@dimen/spacing_8dp"
       android:paddingEnd="@dimen/spacing_8dp"
+      android:paddingBottom="@dimen/dimen_recycler_padding_bottom"
       tools:listitem="@layout/item_movie" />
   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

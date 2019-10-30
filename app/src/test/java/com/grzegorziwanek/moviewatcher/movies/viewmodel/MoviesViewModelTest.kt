@@ -170,4 +170,26 @@ class MoviesViewModelTest {
       Assert.assertEquals(resultState, expectedState)
     }
   }
+
+  @Test
+  fun testMoviesViewModel_searchInputModified_EventInputModified() {
+    val stringEmpty = ""
+    val stringNotEmpty = "not_empty"
+
+    viewModel.events.observeForever(observerState)
+
+    viewModel.searchInputModified(stringEmpty)
+    viewModel.searchInputModified(stringNotEmpty)
+
+    val argumentCaptor = ArgumentCaptor.forClass(MoviesEvent::class.java)
+    val expectedResultOne = MoviesEvent.InputModified(shouldShowClear = false)
+    val expectedResultTwo = MoviesEvent.InputModified(shouldShowClear = true)
+
+    argumentCaptor.run {
+      verify(observerState, times(2)).onChanged(capture())
+      val (resultFirst, resultSecond) = allValues
+      Assert.assertEquals(resultFirst, expectedResultOne)
+      Assert.assertEquals(resultSecond, expectedResultTwo)
+    }
+  }
 }
