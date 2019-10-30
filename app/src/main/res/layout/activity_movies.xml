@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/grey_90">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/searchContainer"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@color/grey_95"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/spacing_16dp"
+    android:paddingEnd="@dimen/spacing_16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <FrameLayout
+      android:id="@+id/focusCatcher"
+      android:layout_width="1dp"
+      android:layout_height="1dp"
+      android:focusable="true"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+      android:id="@+id/search"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:background="@android:color/transparent"
+      android:hint="@string/search"
+      android:imeOptions="actionSearch"
+      android:importantForAutofill="auto"
+      android:maxLines="1"
+      android:singleLine="true"
+      android:textColor="@color/grey_3"
+      android:textColorHint="@color/grey_3"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/btnClear"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+      android:id="@+id/btnClear"
+      android:layout_width="?attr/actionBarSize"
+      android:layout_height="?attr/actionBarSize"
+      android:background="@android:color/transparent"
+      android:tint="@android:color/white"
+      android:visibility="visible"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/btnHelp"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_close" />
+
+    <ImageButton
+      android:id="@+id/btnHelp"
+      android:layout_width="?attr/actionBarSize"
+      android:layout_height="?attr/actionBarSize"
+      android:background="@android:color/transparent"
+      android:visibility="visible"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_info" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/searchContainer">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/movieList"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingStart="@dimen/spacing_8dp"
+      android:paddingEnd="@dimen/spacing_8dp"
+      tools:listitem="@layout/item_movie" />
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+  <androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/stateListEmpty"
+    style="@style/TextAppearance.AppCompat.Large"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_64dp"
+    android:layout_marginEnd="@dimen/spacing_64dp"
+    android:ellipsize="end"
+    android:gravity="center"
+    android:text="@string/no_results_to_show"
+    android:textColor="@color/light_blue_50"
+    android:visibility="invisible"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <include
+    android:id="@+id/progress"
+    layout="@layout/item_progress"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/searchContainer" />
+</androidx.constraintlayout.widget.ConstraintLayout>

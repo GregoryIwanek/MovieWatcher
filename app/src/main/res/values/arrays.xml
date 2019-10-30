@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="movies_array">
+    <item>The Avengers</item>
+    <item>Batman Begins</item>
+    <item>Braveheart</item>
+    <item>The French Connection</item>
+    <item>Gladiator</item>
+    <item>Jaws</item>
+    <item>Lord Of The Rings</item>
+    <item>The Princess Bride</item>
+    <item>Annie Hall</item>
+    <item>Back To The Future</item>
+    <item>City Lights</item>
+    <item>Monty Python</item>
+    <item>Casablanca</item>
+    <item>Citizen Kane</item>
+    <item>Fight Club</item>
+    <item>Pulp Fiction</item>
+    <item>Rocky</item>
+    <item>The Sixth Sense</item>
+    <item>Amelie</item>
+    <item>Crouching Tiger, Hidden Dragon</item>
+    <item>Seven Samurai</item>
+    <item>John Wick</item>
+    <item>The Conjuring</item>
+    <item>Psycho</item>
+    <item>Joker</item>
+    <item>The Silence Of The Lambs</item>
+    <item>The Thing</item>
+    <item>Alien</item>
+    <item>Inception</item>
+    <item>Star Trek</item>
+    <item>The Matrix</item>
+    <item>Terminator</item>
+    <item>Star Wars</item>
+    <item>Alpha</item>
+    <item>Ip Man</item>
+    <item>Night Of The Walking Dead</item>
+    <item>Titanic</item>
+    <item>Event Horizon</item>
+  </string-array>
+</resources>

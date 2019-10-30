@@ -1,0 +1,15 @@
+<resources>
+  <string name="app_name">MovieWatcher</string>
+  <string name="movie_img_w500_url">https://image.tmdb.org/t/p/w500%1$s</string>
+  <string name="non_favourite">NON_FAVOURITE</string>
+  <string name="favourite">FAVOURITE</string>
+  <string name="favourite_changed">Favourite movies changed</string>
+  <string name="movie_release_date">Movie release day: %1$s</string>
+  <string name="movie_rating">Movie rating: %1$s</string>
+  <string name="movie_revenue">Movie revenue: %1$s $$</string>
+  <string name="info_help">Swipe screen to refresh list or type in movie name</string>
+  <string name="something_went_wrong">Something went wrong</string>
+  <string name="search">Search</string>
+  <string name="movie_details">Movie Details</string>
+  <string name="no_results_to_show">No results to show.</string>
+</resources>
