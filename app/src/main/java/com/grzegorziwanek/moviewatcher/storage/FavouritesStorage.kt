@@ -1,11 +1,9 @@
 package com.grzegorziwanek.moviewatcher.storage
 
-import android.content.Context
+import android.content.SharedPreferences
 import io.reactivex.Single
 
-class FavouritesStorage(context: Context) {
-
-  private val preference = context.getSharedPreferences(MOVIES_SHARED_PREF, Context.MODE_PRIVATE)
+class FavouritesStorage(private val preference: SharedPreferences) {
 
   fun refreshFavourites(id: Int): Single<Boolean> = Single.fromCallable {
     val isFavourite: Boolean
@@ -31,8 +29,6 @@ class FavouritesStorage(context: Context) {
   }
 
   companion object {
-
-    private const val MOVIES_SHARED_PREF = "MOVIES_SHARED_PREF"
 
     private const val FAVOURITE_MOVIES_KEY = "FAVOURITE_MOVIES_KEY"
   }

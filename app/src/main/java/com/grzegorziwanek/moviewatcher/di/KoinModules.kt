@@ -7,7 +7,6 @@ import com.grzegorziwanek.moviewatcher.details.viewmodel.DetailsViewModel
 import com.grzegorziwanek.moviewatcher.movies.repository.MoviesRepository
 import com.grzegorziwanek.moviewatcher.movies.usecase.MovieUseCases
 import com.grzegorziwanek.moviewatcher.movies.viewmodel.MoviesViewModel
-import com.grzegorziwanek.moviewatcher.storage.FavouritesStorage
 import org.koin.dsl.module.module
 
 object KoinModules {
@@ -18,7 +17,7 @@ object KoinModules {
     useCaseModule,
     networkModule,
     apiModule,
-    utilModule
+    storageModule
   )
 }
 
@@ -40,9 +39,4 @@ private val useCaseModule = module {
   single { DetailsUseCases(get(), get()) }
 
   single { DetailsRepository(get()) }
-}
-
-private val utilModule = module {
-
-  single { FavouritesStorage(get()) }
 }

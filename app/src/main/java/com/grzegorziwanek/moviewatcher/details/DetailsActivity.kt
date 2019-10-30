@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.grzegorziwanek.moviewatcher.common.BaseActivity
 import com.grzegorziwanek.moviewatcher.R
+import com.grzegorziwanek.moviewatcher.common.BaseActivity
 import com.grzegorziwanek.moviewatcher.details.model.MovieDetails
 import com.grzegorziwanek.moviewatcher.details.viewmodel.DetailsEvent
 import com.grzegorziwanek.moviewatcher.details.viewmodel.DetailsViewModel
@@ -21,11 +21,11 @@ class DetailsActivity : BaseActivity() {
 
   override fun specifyLayoutResId(): Int = R.layout.activity_details
 
-  private var id: Int? = null
+  private val id: Int by lazy { intent.extras?.getInt(MOVIE_ID) ?: 0 }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setup()
+    setupBindings()
 
     viewModel.events.observe(this, Observer { event ->
       when (event) {
@@ -36,16 +36,7 @@ class DetailsActivity : BaseActivity() {
       }
     })
 
-    id?.let { viewModel.getDetails(it) } ?: showMessage(getString(R.string.something_went_wrong))
-  }
-
-  private fun setup() {
-    setupId()
-    setupBindings()
-  }
-
-  private fun setupId() {
-    id = intent.extras?.getInt(MOVIE_ID) ?: 0
+    viewModel.getDetails(id)
   }
 
   private fun setupBindings() {
@@ -56,7 +47,7 @@ class DetailsActivity : BaseActivity() {
       .let { composite.add(it) }
   }
 
-  private fun onFavouriteClick() = id?.let { viewModel.switchFavourite(it) }
+  private fun onFavouriteClick() = viewModel.switchFavourite(id)
 
   private fun handleLoadingSuccess(event: DetailsEvent.LoadingSuccess) {
     setupFavourite(event.details.isFavourite)
